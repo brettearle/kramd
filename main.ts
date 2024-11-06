@@ -7,14 +7,16 @@ type ReadMDOpts = {
   path: string;
 };
 
-const readMD = (opts: ReadMDOpts) => {
+const readMD = async (opts: ReadMDOpts) => {
   if (!opts.path) {
     throw new Error(ReadMDErr.NO_PATH_PROVIDED);
   }
   if (opts.path.slice(-3) !== ".md") {
     throw new Error(ReadMDErr.NOT_A_MD_FILE);
   }
-  return {};
+  const file = await Deno.open(opts.path, { read: true });
+
+  return { fileStream: file.readable, close: () => file.close() };
 };
 
 export { readMD };
