@@ -1,3 +1,4 @@
+//READ MD
 const ReadMDErr = {
   NO_PATH_PROVIDED: "No Path Provided",
   NOT_A_MD_FILE: "Provided Path Not A MD Doc",
@@ -7,7 +8,13 @@ type ReadMDOpts = {
   path: string;
 };
 
-const readMD = async (opts: ReadMDOpts) => {
+/**
+ * reads a mark down file from path provided.
+ * @throws
+ */
+const readMD = async (
+  opts: ReadMDOpts,
+): Promise<{ fileStream: ReadableStream<Uint8Array>; close: () => void }> => {
   if (!opts.path) {
     throw new Error(ReadMDErr.NO_PATH_PROVIDED);
   }
