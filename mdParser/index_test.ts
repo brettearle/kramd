@@ -14,4 +14,8 @@ describe("mdParser", () => {
     await got.cancel();
     await Deno.remove("./test.md");
   });
+
+  it("should read a md with #Hello and return {token: '#Hello', fmt: 'heading 1'}", ()=>{
+
+  })
 });
